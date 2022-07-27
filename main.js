@@ -10,14 +10,12 @@ const products = [
     {id: 7, title: 'Soporte Drean 03 04', price: 4570}
 ]
 
-//Se ejecuta cuando el usuario hace click en "Agregar al carrito" en cada producto
 function addToCart(product){
     cart.push(product)
     console.log('Se agregó ' + product.title + ': $' + product.price + ' al carrito')
     alert('Agregaste ' + product.title + ': $' + product.price + ' al carrito. Productos en carrito: ' + cart.length)
 }
 
-//Se ejecuta cuando el usuario quiera eliminar un producto del carrito
 function deleteFromCart(productId) {
     const index = cart.findIndex((product) => product.id === productId)
     if(index != -1){
@@ -27,23 +25,23 @@ function deleteFromCart(productId) {
     }
 }
 
-//Se ejecuta cuando el usuario quiere buscar un producto, a modo ilustrativo, se usó "Retén" como auto-rellenado para simular el proceso pero en un caso real, el campo estaría vacío
 function search(){
-    let search = prompt('Buscar productos', 'Retén')
+    let search = prompt('Buscar productos')
     const searchResult = products.filter((product) => product.title.includes(search))
     console.log(searchResult)
 } 
 
-addToCart(products[6]),
-addToCart(products[0]),
-addToCart(products[4]),
-addToCart(products[5])
-
-deleteFromCart(1)
-
-search()
-
-addToCart(products[1])
-
 console.log('Cantidad de productos en carrito: ' + cart.length)
 console.log(cart)
+
+products.forEach((product) =>{
+    document.getElementById('productsCatalogue').innerHTML +=
+    `<div class='productCard'>
+    <p>${product.title}</p>
+    <p>$${product.price}</p>
+    <button>Agregar al Carrito</button>
+    </div>`
+    }
+)
+
+document.getElementById('navBar').innerHTML = `<input placeholder="Buscar productos"> </input> <button>Buscar</button>`
