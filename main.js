@@ -28,8 +28,7 @@ products.forEach((product) =>{
     <p>$${product.price}</p>
     <button type="button" id="${buttonId}" class="btn btn-primary">Agregar al Carrito</button>
     </div>`
-}
-)
+})
 
 products.forEach((product) => {
     let buttonId = `addToCart${product.id}`
