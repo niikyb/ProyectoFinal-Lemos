@@ -1,5 +1,14 @@
-const cart = []
-let subtotalCart = 0
+const cart = JSON.parse(localStorage.getItem('cart')) ?? []
+document.getElementById('cart-total').innerHTML = cart.length
+
+let showCart = document.getElementById('show-cart')
+showCart.onclick = () => {
+    cart.forEach((product) => {
+        document.getElementById('cards-modal').innerHTML += `<div>
+            ${product.title} - $${product.price}
+            </div>`
+    })
+}
 
 let products = [
     {id: 1, title: 'Reten 22', price: 220},
@@ -11,15 +20,6 @@ let products = [
     {id: 7, title: 'Soporte Drean 03 04', price: 4570}
 ]
 
-function deleteFromCart(productId) {
-    const index = cart.findIndex((product) => product.id === productId)
-    if(index != -1){
-        cart.splice(index,1)
-        console.log('Se eliminó el producto del carrito')
-        alert('Eliminaste el producto del carrito. Productos en carrito: ' + cart.length)
-    }
-}
-
 products.forEach((product) =>{
     let buttonId = `addToCart${product.id}`
     document.getElementById('productsCatalogue').innerHTML +=
@@ -28,24 +28,14 @@ products.forEach((product) =>{
     <p>$${product.price}</p>
     <button type="button" id="${buttonId}" class="btn btn-primary">Agregar al Carrito</button>
     </div>`
-}
-)
+})
 
 products.forEach((product) => {
     let buttonId = `addToCart${product.id}`
     document.getElementById(buttonId).addEventListener('click', () => {
-        subtotalCart = subtotalCart + product.price
         cart.push(product)
+        localStorage.setItem('cart', JSON.stringify(cart))
+        document.getElementById('cart-total').innerHTML = cart.length
         console.log('Se agregó ' + product.title + ': $' + product.price + ' al carrito. Productos en carrito: ' + cart.length)
-        console.log('Total del carrito: $' + subtotalCart)
     })
-})
-
-let search = document.getElementById('searchInput')
-
-search.addEventListener("input", e => {
-    let value = e.target.value.toLowerCase()
-    let searchResult = products.filter((product) => product.title.toLowerCase().includes(value))
-    console.log(value)
-    console.log(searchResult)
 })
