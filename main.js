@@ -3,6 +3,7 @@ document.getElementById('cart-total').innerHTML = cart.length
 
 let showCart = document.getElementById('show-cart')
 showCart.onclick = () => {
+    document.getElementById('cards-modal').innerHTML = ''
     cart.forEach((product) => {
         document.getElementById('cards-modal').innerHTML += `<div>
             ${product.title} - $${product.price}
