@@ -39,12 +39,3 @@ products.forEach((product) => {
         console.log('Se agregó ' + product.title + ': $' + product.price + ' al carrito. Productos en carrito: ' + cart.length)
     })
 })
-
-let search = document.getElementById('searchInput')
-
-search.addEventListener("input", e => {
-    let value = e.target.value.toLowerCase()
-    let searchResult = products.filter((product) => product.title.toLowerCase().includes(value))
-    console.log(value)
-    console.log(searchResult)
-})
