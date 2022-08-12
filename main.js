@@ -1,15 +1,18 @@
-const cart = JSON.parse(localStorage.getItem('cart')) ?? []
+const cart = JSON.parse(localStorage.getItem('cart')) || []
 document.getElementById('cart-total').innerHTML = cart.length
 
-let showCart = document.getElementById('show-cart')
-showCart.onclick = () => {
+document.getElementById('show-cart').addEventListener('click', () => {
+    cart.length === 0 ? (document.getElementById('cards-modal').innerHTML =
+        `<div>
+        El carrito está vacío
+        </div>`) :
     document.getElementById('cards-modal').innerHTML = ''
     cart.forEach((product) => {
         document.getElementById('cards-modal').innerHTML += `<div>
             ${product.title} - $${product.price}
             </div>`
     })
-}
+})
 
 let products = [
     {id: 1, title: 'Reten 22', price: 220},
