@@ -1,7 +1,9 @@
+let subtotalCart = JSON.parse(localStorage.getItem('cartTotal')) || 0
+
 const cart = JSON.parse(localStorage.getItem('cart')) || []
 document.getElementById('cart-total').innerHTML = cart.length
 
-document.getElementById('show-cart').addEventListener('click', () => {
+function renderCart (){
     if (cart.length === 0){
         (document.getElementById('cards-modal').innerHTML =
         `<div>
@@ -15,6 +17,13 @@ document.getElementById('show-cart').addEventListener('click', () => {
             </div>`
         })
     }
+    document.getElementById('subtotal-cart').innerHTML = `<div>
+        Total: $${subtotalCart}
+        </div>`
+}
+
+document.getElementById('show-cart').addEventListener('click', () => {
+    renderCart()
 })
 
 let products = [
@@ -53,5 +62,7 @@ products.forEach((product) => {
               background: 'linear-gradient(to right, #00b09b, #96c93d)',
             }
           }).showToast();
+        subtotalCart = subtotalCart + product.price
+        localStorage.setItem('cartTotal', JSON.stringify(subtotalCart))
     })
 })
