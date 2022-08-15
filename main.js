@@ -2,16 +2,19 @@ const cart = JSON.parse(localStorage.getItem('cart')) || []
 document.getElementById('cart-total').innerHTML = cart.length
 
 document.getElementById('show-cart').addEventListener('click', () => {
-    cart.length === 0 ? (document.getElementById('cards-modal').innerHTML =
+    if (cart.length === 0){
+        (document.getElementById('cards-modal').innerHTML =
         `<div>
         El carrito está vacío
-        </div>`) :
-    document.getElementById('cards-modal').innerHTML = ''
-    cart.forEach((product) => {
-        document.getElementById('cards-modal').innerHTML += `<div>
+        </div>`)
+    } else {
+        document.getElementById('cards-modal').innerHTML = ''
+        cart.forEach((product) => {
+            document.getElementById('cards-modal').innerHTML += `<div>
             ${product.title} - $${product.price}
             </div>`
-    })
+        })
+    }
 })
 
 let products = [
@@ -41,5 +44,14 @@ products.forEach((product) => {
         localStorage.setItem('cart', JSON.stringify(cart))
         document.getElementById('cart-total').innerHTML = cart.length
         console.log('Se agregó ' + product.title + ': $' + product.price + ' al carrito. Productos en carrito: ' + cart.length)
+        Toastify({
+            text: 'Agregaste ' + product.title + ' al carrito.',
+            offset: {
+                y: 50
+            },
+            style: {
+              background: 'linear-gradient(to right, #00b09b, #96c93d)',
+            }
+          }).showToast();
     })
 })
