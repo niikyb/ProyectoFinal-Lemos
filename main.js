@@ -46,23 +46,27 @@ products.forEach((product) =>{
     </div>`
 })
 
+function addToCart (product){
+    cart.push(product)
+    localStorage.setItem('cart', JSON.stringify(cart))
+    document.getElementById('cart-total').innerHTML = cart.length
+    console.log('Se agregó ' + product.title + ': $' + product.price + ' al carrito. Productos en carrito: ' + cart.length)
+    Toastify({
+        text: 'Agregaste ' + product.title + ' al carrito.',
+        offset: {
+            y: 50
+        },
+        style: {
+            background: 'linear-gradient(to right, #00b09b, #96c93d)',
+        }
+        }).showToast();
+    subtotalCart = subtotalCart + product.price
+    localStorage.setItem('cartTotal', JSON.stringify(subtotalCart))
+}
+
 products.forEach((product) => {
     let buttonId = `addToCart${product.id}`
     document.getElementById(buttonId).addEventListener('click', () => {
-        cart.push(product)
-        localStorage.setItem('cart', JSON.stringify(cart))
-        document.getElementById('cart-total').innerHTML = cart.length
-        console.log('Se agregó ' + product.title + ': $' + product.price + ' al carrito. Productos en carrito: ' + cart.length)
-        Toastify({
-            text: 'Agregaste ' + product.title + ' al carrito.',
-            offset: {
-                y: 50
-            },
-            style: {
-              background: 'linear-gradient(to right, #00b09b, #96c93d)',
-            }
-          }).showToast();
-        subtotalCart = subtotalCart + product.price
-        localStorage.setItem('cartTotal', JSON.stringify(subtotalCart))
+        addToCart(product)
     })
 })
