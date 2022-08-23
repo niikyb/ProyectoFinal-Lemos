@@ -1,5 +1,7 @@
 let subtotalCart = JSON.parse(localStorage.getItem('cartTotal')) || 0
 
+let products = []
+
 const cart = JSON.parse(localStorage.getItem('cart')) || []
 document.getElementById('cart-total').innerHTML = cart.length
 
