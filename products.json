@@ -1,9 +1,14 @@
 [
-    {"id": 1, "title": "Reten 22", "price": 220},
-    {"id": 2, "title": "Reten 25", "price": 270},
-    {"id": 3, "title": "Ruleman SFK 6201", "price": 580},
-    {"id": 4, "title": "Ruleman SFK 6202", "price": 630},
-    {"id": 5, "title": "Ruleman SFK 6203", "price": 630},
-    {"id": 6, "title": "Ruleman SFK 6204", "price": 970},
-    {"id": 7, "title": "Soporte Drean 03 04", "price": 4570}
+    {"img": "./imgs/products/reten22.png", "id": 11, "title": "Reten 21", "price": 300},
+    {"img": "./imgs/products/reten22.png", "id": 1, "title": "Reten 22", "price": 350},
+    {"img": "./imgs/products/reten22.png", "id": 2, "title": "Reten 25", "price": 450},
+    {"img": "./imgs/products/reten22.png", "id": 3, "title": "Ruleman SKF 6201", "price": 900},
+    {"img": "./imgs/products/reten22.png", "id": 4, "title": "Ruleman SKF 6202", "price": 820},
+    {"img": "./imgs/products/reten22.png", "id": 5, "title": "Ruleman SKF 6203", "price": 900},
+    {"img": "./imgs/products/reten22.png", "id": 6, "title": "Ruleman SKF 6204", "price": 1350},
+    {"img": "./imgs/products/reten22.png", "id": 7, "title": "Ruleman SKF 6205", "price": 1600},
+    {"img": "./imgs/products/reten22.png", "id": 12, "title": "Soporte Drean 03 03", "price": 4000},
+    {"img": "./imgs/products/reten22.png", "id": 8, "title": "Soporte Drean 03 04", "price": 5000},
+    {"img": "./imgs/products/reten22.png", "id": 9, "title": "Soporte Drean 04 04", "price": 6000},
+    {"img": "./imgs/products/reten22.png", "id": 10, "title": "Soporte Drean 04 05", "price": 7000}
 ]

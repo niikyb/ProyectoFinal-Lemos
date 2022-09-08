@@ -4,11 +4,14 @@
 }
 
 .productCard{
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
   border: solid 2px black;
   padding: 2px;
+}
+
+.product__img{
+  width: 80px;
 }
