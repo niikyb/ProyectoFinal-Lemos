@@ -1,16 +1,24 @@
+let cartTotal = document.getElementById('cart-total')
+let productsContainer = document.getElementById('productsCatalogue')
+let cartModal = document.getElementById('cards-modal')
+let totalCartPrice = document.getElementById('subtotal-cart')
+let showCart = document.getElementById('show-cart')
+let restartCart = document.getElementById('empty-cart')
+let checkout = document.getElementById('checkout')
+
 let subtotalCart = JSON.parse(localStorage.getItem('cartTotal')) || 0
 
 let products = []
 
 const cart = JSON.parse(localStorage.getItem('cart')) || []
-document.getElementById('cart-total').innerHTML = cart.length
+cartTotal.innerHTML = cart.length
 
 const renderCards = async () => {
     const response = await fetch ('./products.json')
     const data = await response.json ()
     data.forEach((product) =>{
         let buttonId = `addToCart${product.id}`
-        document.getElementById('productsCatalogue').innerHTML +=
+        productsContainer.innerHTML +=
         `<div class='productCard'>
         <img src="${product.img}" class= "product__img">
         <p>${product.title}</p>
@@ -31,7 +39,7 @@ const renderCards = async () => {
                 style: {
                     background: 'linear-gradient(to right, #00b09b, #96c93d)',
                 }
-            }).showToast();
+            }).showToast()
         })
     })
 }
@@ -41,7 +49,7 @@ renderCards ()
 function addToCart (product){
     cart.push(product)
     localStorage.setItem('cart', JSON.stringify(cart))
-    document.getElementById('cart-total').innerHTML = cart.length
+    cartTotal.innerHTML = cart.length
     console.log('Se agregó ' + product.title + ': $' + product.price + ' al carrito. Productos en carrito: ' + cart.length)
     subtotalCart = subtotalCart + product.price
     localStorage.setItem('cartTotal', JSON.stringify(subtotalCart))
@@ -49,46 +57,83 @@ function addToCart (product){
 
 function renderCart (){
     if (cart.length === 0){
-        (document.getElementById('cards-modal').innerHTML =
+        cartModal.innerHTML =
         `<div>
         El carrito está vacío
-        </div>`)
+        </div>`
     } else {
-        document.getElementById('cards-modal').innerHTML = ''
+        cartModal.innerHTML = ''
         cart.forEach((product) => {
-            document.getElementById('cards-modal').innerHTML += `<div>
+            cartModal.innerHTML += `<div>
             ${product.title} - $${product.price}
             </div>`
         })
     }
-    document.getElementById('subtotal-cart').innerHTML = `<div>
+    totalCartPrice.innerHTML = `<div>
         Total: $${subtotalCart}
         </div>`
 }
 
-document.getElementById('show-cart').addEventListener('click', () => {
+showCart.addEventListener('click', () => {
     renderCart()
 })
 
 function emptyCart (){
     cart.length = []
     localStorage.setItem('cart', JSON.stringify(cart))
-    document.getElementById('cart-total').innerHTML = cart.length
+    cartTotal.innerHTML = cart.length
     subtotalCart = 0
     localStorage.setItem('cartTotal', JSON.stringify(subtotalCart))
     console.log ('Se vació el carrito')
 }
 
-document.getElementById('empty-cart').addEventListener('click', () => {
+function alertEmptyCart () {
     Toastify({
-        text: 'Vaciaste el carrito.',
+        text: '¡El carrito está vacío!',
         offset: {
             y: 50
         },
         style: {
             background: 'linear-gradient(to right, #00b09b, #96c93d)',
         }
-    }).showToast();
-    emptyCart()
-    renderCart()
+    }).showToast()
+}
+
+restartCart.addEventListener('click', () => {
+    if (cart.length === 0){
+        alertEmptyCart()
+    } else {
+        Toastify({
+            text: 'Vaciaste el carrito.',
+            offset: {
+                y: 50
+            },
+            style: {
+                background: 'linear-gradient(to right, #00b09b, #96c93d)',
+            }
+        }).showToast()
+        emptyCart()
+        renderCart()
+    }
+})
+
+checkout.addEventListener('click', () => {
+    if (cart.length === 0){
+        alertEmptyCart()
+    } else {
+        Toastify({
+            text: '¡Gracias por su compra!',
+            offset: {
+                y: 50
+            },
+            style: {
+                background: 'linear-gradient(to right, #00b09b, #96c93d)',
+            }
+        }).showToast()
+        cartModal.innerHTML =
+        `<div>
+        ¡Gracias por su compra!
+        </div>`
+        emptyCart()
+    }
 })
